@@ -125,6 +125,9 @@
 .add {
     margin-right: 5px;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 30px;
     width: 30px;
     border: solid #3471ff71 1.5px;
@@ -231,7 +234,38 @@
     display: none;
 }
 
+.category {
+    background-color: #2e61d865;
+    padding-inline: 15px;
+    color: white;
+    font-weight: unset;
+    border-radius: 15px;
+    padding-block: 3px;
+    border: #2e61d8 solid 2px;
+    transition: background-color .3s ease;
+    cursor: pointer;
+    display: flex;
+    gap: 2px;
+    position: relative;
+    padding-bottom: 2px;
+}
 
+.category.active {
+    background-color: #2e61d8;
+}
+
+.category:hover {
+    background-color: #2e61d8;
+    transition: background-color .3s ease;
+}
+
+.categories {
+    display: flex;
+    margin-left: 10px;
+    gap: 5px;
+    flex-wrap: wrap;
+    transition: all .3s;
+}
 
 @keyframes fly-in {
     0% {
@@ -262,7 +296,7 @@
     }
 
     .note.expanded .list {
-        position: absolute;
+        position: fixed;
         left: 20px;
         bottom: 20px;
         width: 40px;

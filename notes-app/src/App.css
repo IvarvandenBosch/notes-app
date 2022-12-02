@@ -1,0 +1,284 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.App {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    background-color: #1B1B1B;
+}
+
+.sidebar {
+    height: 100vh;  
+    background-color: #313131;
+    width: 400px;
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.notecard {
+    padding: 20px;
+    background-color: #1f1f1f;
+    border-radius: 5px;
+    margin-inline: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.anim:first-of-type {
+    animation: fly-in forwards .5s alternate;
+    animation-iteration-count: 1
+}
+
+.notecard h3 {
+    color: white;
+    font-size: 19px;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.notecard p {
+    color: #A6A6A6;
+    font-size: 14px;
+    width: 100%;
+    max-height: 100px;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.note {
+    width: 100%;
+    margin: 20px;
+    color: #fff;
+}
+
+.note .title  {
+    font-size: 30px;
+    background-color: transparent;
+    border: 0;
+    color: #fff;
+    width: 100%;
+}
+
+.note input:active {
+    outline: none;
+}
+
+.note input:focus {
+    outline: none;
+}
+
+.note hr {
+    width: 90%;
+    opacity: .3;
+    margin-top: 20px;
+}
+
+.note textarea {
+    background-color: transparent;
+    border: 0;
+    color: #A6A6A6;
+    font-size: 16px;
+    margin-top: 20px;
+    width: 100%;
+    height: 70%;
+    resize: none;
+}
+
+.note textarea:active {
+    outline: none;
+}
+
+.note textarea:focus {
+    outline: none;
+}
+
+.sidebar hr {
+    width: 90%;
+    align-self: center;
+    opacity: .4;
+}
+
+.sidebar .title {
+    color: #fff;
+    font-size: 30px;
+}
+
+.sidebar .top {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-inline: 10px;
+    
+}
+
+.add {
+    margin-right: 5px;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    border: solid #3471ff71 1.5px;
+    background-color: #3471ff54;
+    cursor: pointer;
+    transition: all .2s;
+    font-size: 22px;
+    color: #fff;
+}
+
+.sidebar .top {
+    display: block;
+}
+
+.top section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar .top .add:hover {
+    background-color: #3471ff96;
+    transition: all .2s;
+}
+
+.search {
+    margin-top: 10px;
+}
+
+.search input {
+    background-color: #222222;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    width: 100%;
+    padding: 7px;
+    padding-left: 10px;
+}
+
+.search .search-btn {
+    background-color: #3471FF;
+    border: none;
+    color: #fff;
+    border-radius: 6px;
+    fill: #fff;
+    padding: 3px;
+    padding-inline: 6px;
+    cursor: pointer;
+}
+
+.delete {
+    margin-right: 5px;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    border: solid #ff343471 1.5px;
+    background-color: #ff343454;
+    cursor: pointer;
+    transition: all .2s;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: #fff;
+}
+
+.delete:hover {
+    border: solid #ff3434a1 1.5px;
+    background-color: #ff343481;
+}
+
+.notecardcontent {
+    width: 100%;
+}
+
+.category {
+    font-weight: bold;
+    color: #898989;
+    background-color: transparent;
+    border: 0;
+    width: min-content;
+}
+
+.date {
+    font-size: 10px;
+    color: #3471FF;
+}
+
+.add-category {
+    margin-right: 5px;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    border: solid #3471ff71 1.5px;
+    background-color: #3471ff54;
+    cursor: pointer;
+    transition: all .2s;
+    font-size: 22px;
+    color: #fff;
+}
+.list {
+    display: none;
+}
+
+
+
+@keyframes fly-in {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 500px) {
+    .sidebar.collapsed {
+        width: 100%;
+    }
+    .note.collapsed {
+        display: none;
+    } 
+
+    .note.expanded {
+        height: 100vh;
+        width: 100%;
+    }
+
+    .sidebar.expanded {
+        display: none;
+    }
+
+    .note.expanded .list {
+        position: absolute;
+        left: 20px;
+        bottom: 20px;
+        width: 40px;
+        height: 40px;
+        background-color: #3471FF;
+        padding: 10px;
+        border-radius: 40px;
+        fill: #fff;
+        display: block;
+        cursor: pointer;
+        transition: all .4s;
+    }
+    
+    .note.expanded .list:hover {
+        background-color: #2e61d8;
+        transition: all .4s;
+        border-radius: 10px;
+    }
+}

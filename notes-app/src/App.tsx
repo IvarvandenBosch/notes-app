@@ -3,7 +3,8 @@ import "./App.css";
 import moment from "moment";
 import useLocalStorage from "./useLocalStorage";
 import SideBarNotes from "./components/SideBarNotes";
-import ListIcon from "./components/ListIcon";
+import ListIcon from "./components/svgs/ListIcon";
+import DownloadIcon from "./components/svgs/DownloadIcon";
 
 function App() {
   // current time and date
@@ -78,6 +79,15 @@ function App() {
     }
   }
 
+  function downloadNote(index: number) {
+    const element = document.createElement("a");
+    const file = new Blob([filteredNotes[index].content], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = `${filteredNotes[index].title.replace(' ', '_')}.txt`;
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
+
   return (
     <div className="App">
       {/* @ts-ignore */}
@@ -114,8 +124,8 @@ function App() {
                 return;
               })}
             </div>
-            <button className="add" onClick={() => categoryAdd(index)}>
-              +
+            <button className="download" onClick={() => downloadNote(index)}>
+              <DownloadIcon width="20px" height="20px" />
             </button>
             <textarea
               placeholder="click here to edit!"

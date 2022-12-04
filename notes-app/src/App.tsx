@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, ReactNode, Component } from "react";
+import { useState } from "react";
 import "./App.css";
 import moment from "moment";
 import useLocalStorage from "./useLocalStorage";
@@ -19,11 +19,10 @@ function App() {
     },
   ]);
   const [shownNoteIndex, setShownNoteIndex] = useState(0);
-  const [animation, setAnimation] = useState(false);
-  const [expanded, setExpanded] = useState(false);
-  const [filteredCategories, setFilteredCategories] = useState([
-    notes.categories,
-  ]);
+  const [ui, setUi] = useState({
+    animation: false,
+    expanded: false
+  });
 
   const filteredNotes = notes.filter((val: any) => {
     if (searchTerm == "") {
@@ -36,7 +35,9 @@ function App() {
   function handleNoteClick(index: number) {
     setShownNoteIndex(index);
     if (window.innerWidth <= 500) {
-      setExpanded(true);
+      setUi(
+       {...ui,
+        expanded: true});
     }
   }
 
@@ -63,10 +64,16 @@ function App() {
     };
     newNotes = [newNote].concat(newNotes);
     setNotes(newNotes);
-    setAnimation(true);
+    setUi({
+      ...ui,
+      animation: true
+    });
 
     setTimeout(() => {
-      setAnimation(false);
+      setUi({
+        ...ui,
+        animation: false
+      });
     }, 500);
   }
 
@@ -93,25 +100,23 @@ function App() {
       {/* @ts-ignore */}
       <SideBarNotes
         handleNoteClick={handleNoteClick}
-        expanded={expanded}
+        ui={ui}
+        setUi={setUi}
         date={date}
         deleteNote={deleteNote}
-        animation={animation}
         setShownNoteIndex={setShownNoteIndex}
         filteredNotes={filteredNotes}
         createNote={createNote}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         key={1}
-        filteredCategories={filteredCategories}
-        setFilteredCategories={setFilteredCategories}
       />
 
       {filteredNotes.map((note: any, index: number) => {
         return index === shownNoteIndex ? (
           <div
             key={index}
-            className={`note ${expanded ? "expanded" : "collapsed"}`}
+            className={`note ${ui.expanded ? "expanded" : "collapsed"}`}
           >
             <input
               className="title"
@@ -132,7 +137,10 @@ function App() {
               value={notes[index].content}
               onChange={(e) => handleContentChange(index, e)}
             />
-            <div className="list" onClick={() => setExpanded(false)}>
+            <div className="list" onClick={() => setUi({
+              ...ui,
+              expanded: false
+            })}>
               <ListIcon width="20px" height="20px" />
             </div>
           </div>
@@ -151,7 +159,3 @@ function App() {
 }
 
 export default App;
-
-function categoryAdd(index: number): void {
-  throw new Error("Function not implemented.");
-}

@@ -7,20 +7,20 @@ interface SideBarNotesProps {
   filteredNotes: Array<1>;
   createNote: (e: any) => Function;
   setShownNoteIndex: (index: number) => void;
-  animation: Boolean;
-  expanded: Boolean;
+  ui: {
+      expanded: boolean,
+      animation: boolean
+    };
   deleteNote: (e: any, index: Number) => Function;
   date: string;
   handleNoteClick: (index: Number) => Function;
-  filteredCategories: [string];
-  setFilteredCategories: (filteredCategories: any) => void;
 }
 
 export default class SideBarNotes extends Component<SideBarNotesProps> {
   render() {
     return (
       <div
-        className={`sidebar ${this.props.expanded ? "expanded" : "collapsed"}`}
+        className={`sidebar ${this.props.ui.expanded ? "expanded" : "collapsed"}`}
       >
         <section className="top">
           <section className="flex">
@@ -45,7 +45,7 @@ export default class SideBarNotes extends Component<SideBarNotesProps> {
               <div
                 key={index}
                 onClick={() => this.props.handleNoteClick(index)}
-                className={`notecard ${this.props.animation && "anim"}`}
+                className={`notecard ${this.props.ui.animation && "anim"}`}
               >
                 <h3>{note.title}</h3>
                 <p>{note.content}</p>

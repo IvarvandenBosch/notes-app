@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 
-interface SideBarNotesProps {
+type SideBarNotesProps = {
   searchTerm: string;
   setSearchTerm: (searchTerm: string) => void;
   filteredNotes: Array<1>;
@@ -51,6 +51,7 @@ export default class SideBarNotes extends Component<SideBarNotesProps> {
                 <p>{note.content}</p>
                 <button
                   className="delete"
+                  disabled={this.props.filteredNotes.length === && true}
                   onClick={(e) => this.props.deleteNote(e, index)}
                 >
                   <svg

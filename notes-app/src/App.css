@@ -228,7 +228,13 @@
   color: #fff;
 }
 
-.delete:hover {
+.delete:disabled {
+  border: solid #9b9b9b71 1.5px;
+  background-color: #81818154;
+  cursor: default;
+}
+
+.delete:not(:disabled):hover {
   border: solid #ff3434a1 1.5px;
   background-color: #ff343481;
 }
